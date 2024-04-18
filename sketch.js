@@ -1,5 +1,7 @@
 let str1;
 let str2;
+let grid;
+let cellSize;
 
 function setup() {
   createCanvas(500, 500);
@@ -13,6 +15,7 @@ function setup() {
     RIGHT,
     BOTTOM
   );
+  grid = new Grid(5, 5, width, height);
 }
 function draw() {
   background(0);

@@ -32,3 +32,23 @@ class TextObj {
     pop();
   }
 }
+
+class Grid {
+  constructor(rows, cols, cnvWidth, cnvHeight) {
+    this.rows = rows;
+    this.cols = cols;
+    this.cellSize = new Cell(cnvWidth / cols, cnvHeight / rows);
+    this.map = this.#createMap();
+  }
+
+  #createMap() {
+    return Array.from(Array(this.rows).fill(0), () => Array(this.cols).fill(0));
+  }
+}
+
+class Cell {
+  constructor(width, height) {
+    this.width = width;
+    this.height = height;
+  }
+}
