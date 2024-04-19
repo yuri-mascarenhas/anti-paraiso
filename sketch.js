@@ -11,7 +11,7 @@ let img;
 function setup() {
   createCanvas(500, 500);
   str1 = new TextObj(
-    "meus amig__",
+    "todos m____",
     TEXT_PADDING,
     TEXT_PADDING,
     20,
@@ -20,11 +20,11 @@ function setup() {
     TOP
   );
   str2 = new TextObj(
-    "hoje estão todos m____",
+    "meus amig__",
     width - TEXT_PADDING,
     height - TEXT_PADDING,
     20,
-    255,
+    (255, 0, 10),
     RIGHT,
     BOTTOM
   );
@@ -34,7 +34,8 @@ function setup() {
 
 function draw() {
   image(img, 0, 0, width, height);
-  filter(THRESHOLD, fluctuatingValue(0.3, 0.5, frameCount));
+  filter(THRESHOLD, fluctuatingValue(0.2, 0.5, frameCount + 190, 0.01));
+  filter(BLUR, 10);
   // Texts
   str1.display();
   str2.display();
@@ -54,5 +55,5 @@ function draw() {
 const fluctuatingValue = (min, max, num, freq = 0.01) => {
   let amplitude = (max - min) / 2;
 
-  return min + amplitude * sin(freq * num);
+  return min + amplitude * sin(num / 50);
 };
