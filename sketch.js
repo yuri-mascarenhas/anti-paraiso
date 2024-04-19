@@ -1,5 +1,6 @@
 // Constants
 const TEXT_PADDING = 10;
+const STR1 = ["todos m____", "todos merdas", "todos mortos"];
 
 // Variables
 let str1;
@@ -7,6 +8,7 @@ let str2;
 let grid;
 let cellSize;
 let img;
+let lastMove;
 
 function setup() {
   createCanvas(500, 500);
@@ -30,6 +32,7 @@ function setup() {
   );
   grid = new Grid(5, 5, width, height);
   img = loadImage("assets/men.jpeg");
+  lastMove = 0;
 }
 
 function draw() {
@@ -37,8 +40,13 @@ function draw() {
   filter(THRESHOLD, fluctuatingValue(0.2, 0.5, frameCount + 190, 0.01));
   filter(BLUR, 10);
   // Texts
-  str1.display();
   str2.display();
+  if (millis() - lastMove > 1000) {
+    str1.display();
+    lastMove = millis();
+    if (str1.y >= 100) str1.y = -20;
+    str1.y += 20;
+  }
 }
 
 // Utils
