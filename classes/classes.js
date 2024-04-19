@@ -15,12 +15,11 @@ class TextObj {
     this.color = color;
     this.horizAlign = horizAlign;
     this.vertAlign = vertAlign;
-    this.speed = 10;
   }
 
-  update(dx = 1, dy = 1) {
-    this.x += dx * this.speed;
-    this.y += dy * this.speed;
+  move(dx = 1, dy = 1) {
+    this.x += dx;
+    this.y += dy;
   }
 
   display() {
