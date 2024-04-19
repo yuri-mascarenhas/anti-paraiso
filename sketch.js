@@ -49,6 +49,13 @@ function draw() {
   }
 }
 
+// Other p5.js functions
+function keyPressed() {
+  if (key === "s") {
+    saveCanvas("export", "png");
+  }
+}
+
 // Utils
 
 /**
