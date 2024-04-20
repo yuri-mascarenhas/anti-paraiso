@@ -1,6 +1,10 @@
-// Constants
+/**
+ *Constansts
+ * - All time constants are in ms
+ */
 const TEXT_PADDING = 10;
 const STR1 = ["todos m____", "todos merdas", "todos mortos"];
+const DISPLAY_TIME = 1500;
 
 // Variables
 let str1;
@@ -9,6 +13,7 @@ let grid;
 let cellSize;
 let img;
 let lastMove;
+let thresholdValue;
 
 function setup() {
   createCanvas(500, 500);
@@ -37,16 +42,12 @@ function setup() {
 
 function draw() {
   image(img, 0, 0, width, height);
-  filter(THRESHOLD, fluctuatingValue(0.2, 0.5, frameCount + 190, 0.01));
+  thresholdValue = fluctuatingValue(0.01, 0.5, frameCount + 190, 0.02);
+  filter(THRESHOLD, thresholdValue);
   filter(BLUR, 10);
   // Texts
   str2.display();
-  if (millis() - lastMove > 1000) {
-    str1.display();
-    lastMove = millis();
-    if (str1.y >= 100) str1.y = -20;
-    str1.y += 20;
-  }
+  console.log(frameCount);
 }
 
 // Other p5.js functions
@@ -68,7 +69,8 @@ function keyPressed() {
  * @returns {number} - The fluctuating value within range converted from num
  */
 const fluctuatingValue = (min, max, num, freq = 0.01) => {
-  let amplitude = (max - min) / 2;
-
-  return min + amplitude * sin(num / 50);
+  let range = max - min;
+  let amplitude = range / 2;
+  let scaledNum = map(sin(num * freq), -1, 1, -0.5, 0.5);
+  return min + amplitude + amplitude * scaledNum;
 };
